@@ -143,15 +143,18 @@ async def chat(text: str = Form(None), image: UploadFile = File(None)):
     # 5. Call Gemini
     system_instruction = f"{settings['system_prompt']}\n\nYou are {settings['character_name']}. The user's name is {settings['user_name']}."
     
-    response = ai_client.models.generate_content(
-        model='gemini-2.5-flash',
-        contents=contents,
-        config=types.GenerateContentConfig(
-            system_instruction=system_instruction
+    try:
+        response = ai_client.models.generate_content(
+            model='gemini-3.5-flash-lite',
+            contents=contents,
+            config=types.GenerateContentConfig(
+                system_instruction=system_instruction
+            )
         )
-    )
-
-    assistant_reply = response.text
+        assistant_reply = response.text
+    except Exception as e:
+        print(f"Gemini API Error: {e}")
+        assistant_reply = "I'm sorry, my AI brain is currently experiencing high demand (503 Overloaded). Please try again in a few seconds!"
 
     # 6. Save assistant reply to database
     supabase.table("messages").insert({
