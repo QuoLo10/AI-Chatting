@@ -1,0 +1,13 @@
+# Context for Worker M1
+- Role: Ingestion & Dependencies Worker
+- Milestone: M1 (Dependencies & Data Ingestion Engine)
+- Working directory: C:\Users\HKQL2\Documents\ExBuild\.agents\worker_m1
+- Exclusive Write Ownership:
+  - requirements.txt
+  - src/__init__.py
+  - src/config.py
+  - src/ingestion/__init__.py
+  - src/ingestion/parser.py
+  - src/ingestion/persona_profile.py
+  - tests/__init__.py
+  - tests/test_ingestion.py
